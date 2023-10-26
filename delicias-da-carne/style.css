@@ -294,10 +294,9 @@ i {
     transition: transform 500ms ease;
 }
 
-.section-bar:hover ~ .circle {
+.section-bar:focus-within ~ .circle {
     transform: scale(1);
 }
-
 
 .red {
     color: red;
