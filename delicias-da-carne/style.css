@@ -8,13 +8,27 @@
     src: url(fonts/Cinzel-Regular.ttf);
 }
 
+@font-face {
+    font-family: "Open Sans";
+    src: url(fonts/OpenSans-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url(fonts/OpenSans-ExtraBold.ttf);
+    font-weight: bold;
+}
+
 /*======================
     Variáveis
 ======================*/
 
 :root {
-    --clr-white: #F2F2F2;
+    --clr-white: #EFEFEF;
+    --clr-chalk: #D0D0D0;
     --clr-black: #333;
+    --clr-red: #c81c24;
     --transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -41,21 +55,14 @@ h1 {
     font-size: 1.4rem;
 }
 
+h2 {
+    font-family: "Open Sans";
+    font-weight: bold;
+}
+
 h5 {
     text-align: center;
     font-family: "Cinzel";
-}
-
-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    height: 70px;
-    padding: 1rem;
-
-    background-color: #F2B263;
-
 }
 
 i {
@@ -73,6 +80,20 @@ i {
 /*======================
     Título e logotipo
 ======================*/
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 80px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    background-image: linear-gradient(to right, #1f1f1f, transparent, #1f1f1f), url(midia/chalkboard-bg.jpg);
+    background-position: center center;
+
+    border-bottom: 3px solid black;
+}
 
 .header-title {
     display: flex;
@@ -90,19 +111,26 @@ i {
     display: block;
      
     position: relative;
-    bottom: 10px;
+    bottom: 5px;
+
+    color: var(--clr-chalk);
+    text-align: center;
+
+    z-index: 1;
 }
 
 .header-title img {
     display: block;
 
     position: relative;
-    bottom: 30px;
+    bottom: 20px;
 
     height: 80px;
 
     user-select: none;
     pointer-events: none;
+
+    z-index: 2;
 }
 
 .header-frame-container {
@@ -110,7 +138,7 @@ i {
 
     position: absolute;
     left: 50%;
-    top: 5px;
+    top: 15px;
 
     width: 150px;
     height: 50px;
@@ -126,7 +154,7 @@ i {
     width: 150px;
     height: 150px;
 
-    border: 10px solid rgba(200, 132, 37, 0.284);
+    border: 10px solid rgba(88, 88, 88, 0.284);
     border-radius: 50% 50% 0 0;
 }
 
@@ -267,41 +295,115 @@ i {
     Secções
 ======================*/
 
-#bovinos img {
-    width: 30px;
+main {
+    height: calc(100vh - 80px);
 }
 
 .section-bar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    justify-items: center;
+
     height: 100px;
     width: 100%;
-    transform: scaleY(0.5);
-    
-    background-color: rgba(128, 128, 128, 0.521);
 
-    transition: transform 300ms ease;
+    cursor: pointer;
 }
 
-.section-bar:hover {
-    transform: scaleY(1);
+.section-icon {
+    width: 50px;
+    
+    transform: scale(0.8);
+
+    transition: transform 300ms ease;
+
+    z-index: 1;
+}
+
+.section-title {
+    z-index: 1;
+    color: var(--clr-black);
+
+    transition: color 300ms ease-out;
+}
+
+.bar-fill {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+
+    transform: scaleY(0.5);
+
+    background-image: linear-gradient(to right, transparent, rgba(202, 202, 202, 0.782), transparent);
+
+    transition: all 300ms ease;
+    
+    z-index: 0;
 }
 
 .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 100px;
     height: 100px;
-    transform: scale(0);
-    background-color: black;
-    border-radius: 50%;
-    transition: transform 500ms ease;
+
+    z-index: 1;
 }
 
-.section-bar:focus-within ~ .circle {
+.circle-fill {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+
+    background-color: var(--clr-red);
+
+    border-radius: 50%;
+
+    transform: scale(0);
+
+    transition: transform 500ms cubic-bezier(0.25, 0.1, 0.34, 1.43);
+    z-index: 0;
+}
+
+.section-bar:hover .bar-fill {
+    transform: scaleY(1);
+    background-image: none;
+    background-color: var(--clr-black);
+}
+
+.section-bar:hover .section-icon {
     transform: scale(1);
 }
 
+.section-bar:hover .section-title {
+    color: var(--clr-chalk);
+}
+
+.section-bar:hover .circle-fill {
+    transform: scale(1);
+}
+
+/*======================
+    Footer
+======================*/
+
+footer {
+    height: 100px;
+
+    background-image: linear-gradient(to right, #1f1f1f, transparent, #1f1f1f), url(midia/chalkboard-bg.jpg);
+    background-position: center center;
+
+    border-top: 3px solid black;
+}
+
+
 .red {
-    color: red;
+    color: var(--clr-white);
 }
 
 .blue {
-    color: blue;
+    color: var(--clr-white);
 }
