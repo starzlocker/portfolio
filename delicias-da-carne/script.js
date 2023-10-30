@@ -1,3 +1,7 @@
+/*==================
+    Slider
+==================*/
+
 let destaqueBoxes = document.querySelectorAll("#destaque .box");
 let acougueBoxes = document.querySelectorAll("#acougue .box");
 let acougueButtons = document.querySelectorAll("#acougue .item-container .button-container .button ");
@@ -99,3 +103,35 @@ function sliderAcougue() {
   
   }
 
+/*==================
+    Buy Counter
+==================*/
+
+let toCartButton = document.querySelectorAll(".buy button");
+
+console.log(toCartButton)
+
+toCartButton.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        let parent = btn.parentElement.parentElement.parentElement;
+        toCart(btn.id, parent);
+    })
+})
+
+function toCart(action, parentElement) {
+    let itemCounter = parentElement.querySelector(".item-counter"); 
+
+
+    // como vamos saber em qual elemento estamos???
+
+
+    let counter = Number(itemCounter.textContent);
+
+    if (counter > 0) {
+        action === "add" ? itemCounter.textContent = ++counter :
+                            itemCounter.textContent = --counter;
+    } else {
+        action === "add" ? itemCounter.textContent = ++counter :
+        null;
+    }
+}
