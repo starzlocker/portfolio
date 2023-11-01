@@ -1,4 +1,14 @@
 @font-face {
+    font-family: "LoveYa";
+    src: url(fonts/LoveYaLikeASister-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Allison";
+    src: url(fonts/Allison-Regular.ttf);
+}
+
+@font-face {
     font-family: "Young Serif";
     src: url(fonts/YoungSerif-Regular.ttf);
 }
@@ -40,24 +50,36 @@
 }
 
 html, body {
-    height: 100%;
+    min-width: 350px;
     background-color: var(--clr-white);
 }
 
 body {
+    display: flex ;
+    flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
 }
 
 h1 {
-    font-family: "Young Serif";
+    font-family: "LoveYa";
     color: var(--clr-black);
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+
+    transition: font-size 300ms ease;
 }
 
 h2 {
-    font-family: "Open Sans";
-    font-weight: bold;
+    font-family: "Allison";
+    font-size: 4rem;
+}
+
+h3 {
+    font-family: "Young Serif";
+}
+
+h4 {
+    font-family: "Young Serif";
 }
 
 h5 {
@@ -81,49 +103,34 @@ i {
     Título e logotipo
 ======================*/
 header {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
 
+    min-width: 350px;
     height: 80px;
     padding: 1rem;
     margin-bottom: 2rem;
 
-    background-image: linear-gradient(to right, #1f1f1f, transparent, #1f1f1f), url(midia/chalkboard-bg.jpg);
+    background-image: linear-gradient(to right, #1f1f1f 20%, transparent, #1f1f1f 80%), url(midia/chalkboard-bg.jpg);
     background-position: center center;
 
     border-bottom: 3px solid black;
 }
 
-.header-title {
-    display: flex;
-    flex-direction: column;
-
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
-
-}
-
 .header-title h1 {
-    display: block;
-     
-    position: relative;
-    bottom: 5px;
-
     color: var(--clr-chalk);
     text-align: center;
-
     z-index: 1;
 }
 
 .header-title img {
     display: block;
 
-    position: relative;
-    bottom: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 2.5rem;
 
     height: 80px;
 
@@ -131,31 +138,19 @@ header {
     pointer-events: none;
 
     z-index: 2;
+
 }
 
-.header-frame-container {
-    display: block;
-
-    position: absolute;
-    left: 50%;
-    top: 15px;
-
-    width: 150px;
-    height: 50px;
-
-    transform: translateX(-50%);
-    overflow: hidden;
+@media (max-width: 450px) {
+    h1 {
+        font-size: 1.4rem;
+    }
 }
 
-#header-frame {
-    content: "";
-    position: relative;
-
-    width: 150px;
-    height: 150px;
-
-    border: 10px solid rgba(88, 88, 88, 0.284);
-    border-radius: 50% 50% 0 0;
+@media (max-width: 350px) {
+    .header-title img {
+        left: 175px;
+    }
 }
 
 /*======================
@@ -168,10 +163,17 @@ header {
 
 #destaque {
     display: flex;
-    justify-content: center;
-    padding: 0 1rem;
+    flex-direction: column;
 
-    height: 500px;
+    min-width: 350px;
+    height: calc(80.8px + 466.66px);
+
+    transition: height 300ms ease;
+}
+
+#destaque .slide-container {
+    width: 100%;
+    height: 100%;
 }
 
 #destaque .box {
@@ -179,14 +181,23 @@ header {
     justify-content: center;
     position: absolute;
 
-    width: 100%;
-    max-width: 700px;
+    width: 700px;
+
 
     overflow: hidden;
 
     cursor: pointer;
 
-    transition: left 300ms ease, transform 300ms ease;
+    transition: left 300ms ease, transform 300ms ease, width 300ms ease;
+}
+
+#destaque .box-fill {
+    position: absolute;
+    width: 100%;
+    height: 466.66px;
+    background-color: black;
+
+    transition: height 300ms ease;
 }
 
 #destaque .box .info {
@@ -198,16 +209,14 @@ header {
 
     padding: .5rem;
 
+    border-right: 2px solid black;
+
     background-color: black;
-    transition: transform 300ms ease;
+    transition: transform 300ms ease, background-color 300ms ease;
 }
 
 #destaque .box .info {
     color: white;
-}
-
-#destaque .box:hover .info {
-    transform: translateX(-100%);
 }
 
 #destaque .info h2 {
@@ -218,10 +227,15 @@ header {
     margin: .5rem 0;
 }
 
+#destaque .info h3 {
+    transition: font-size 300ms ease;
+}
+
 #destaque .info p {
     text-align: center;
     letter-spacing: 1px;
     line-height: 1.5;
+    transition: font-size 300ms ease;
 }
 
 /* .box:hover .info {
@@ -257,50 +271,121 @@ transition: none;
 scale: 0;
 }
 
-  @media (max-width: 600px) {
+@media (max-width: 730px) {
     #destaque {
-        height: 410px;
+        height: calc(80.8px + 366.66px);
+    }
+    
+    #destaque .box-fill {
+        height: 366.66px;
+    }
+
+    #destaque .box {
+        width: 550px;
     }
 }
 
-  @media (max-width: 400px) {
+  @media (max-width: 600px) {
+    #destaque .box {
+        width: 450px;
+    }
+
     #destaque {
+        height: calc(80.8px + 300px);
+    }
+    
+    #destaque .box-fill {
         height: 300px;
     }
 }
 
+@media (min-width: 450px) {
+    #destaque .box:hover .info {
+        transform: translateX(-100%);
+    }
+}
+
+@media (max-width: 450px) {
+    #destaque .box .info {
+        width: 150px;
+        transform: translateX(-100%);
+        background-color: rgba(0, 0, 0, 0.699);
+    }
+
+    #destaque .info p {
+        font-size: .8rem;
+    }
+
+    #destaque .info h3 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    #destaque .box {
+        width: 350px;
+    }
+
+    #destaque {
+        height: calc(80.8px + 233.33px);
+    }
+
+    #destaque .box-fill {
+        height: 233.33px;
+    }
+
+}
 /*======================
     Menu de navegação
 ======================*/
 .header-nav-button {
-    margin-left: auto;
+    justify-self: end;
+    width: 30px;
+    height: 30px;
 }
 /* === Menu === */
 .header-menu {
 
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 100%;
 
-    width: 70%;
+    width: 50%;
+    max-width: 400px;
     height: 0;
 
     background-color: var(--clr-black);
     color: var(--clr-chalk);
     border-left: 2px solid rgba(199, 199, 199, 0.51);
 
-    transition: left 400ms cubic-bezier(0.83, 0.11, 0.14, 1.04), height 401ms step-end;
+    transition: 
+    transform 400ms cubic-bezier(0.83, 0.11, 0.14, 1.04), 
+    height 401ms step-end, 
+    padding 401ms step-end, 
+    width 300ms ease;
 
     overflow: hidden;
 
-    z-index: 2;
+    z-index: 6;
 }
+
 
 /* show menu */
 #header-menu-toggle:checked ~ .header-menu {
+    padding: 1rem;
     height: 100%;
-    left: 30%;
-    transition: left 400ms cubic-bezier(0.83, 0.11, 0.14, 1.04), height 1ms step-end;
+    transform: translateX(-100%);
+    transition: transform 400ms cubic-bezier(0.83, 0.11, 0.14, 1.04), 
+    height 1ms step-end,
+    width 300ms ease;
+}
+
+.nav-links {
+    margin-top: 3rem;
+}
+
+.nav-links .list-line {
+    height: 3px;
 }
 
 .header-menu li {
@@ -308,7 +393,7 @@ scale: 0;
     justify-content: start;
 
     margin: 0;
-    padding: 0.5rem 0;
+    padding: 1rem 0;
 
     width: 100%;
 
@@ -331,7 +416,8 @@ scale: 0;
     
     cursor: pointer;
 
-    z-index: 3;
+    z-index: 7;
+
 }
 
 #header-menu-toggle {
@@ -366,6 +452,10 @@ scale: 0;
     margin-top: 8px;
 }
 
+#header-menu-toggle:checked + .header-menu-button-container {
+    position: fixed;
+} 
+
 #header-menu-toggle:checked + .header-menu-button-container .header-menu-button {
     width: 20px;
 }
@@ -374,26 +464,80 @@ scale: 0;
     width: 10px;
 }
 
+.header-menu .close-menu-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    /* margin-left: auto; */
+
+    position: relative;
+
+    height: 30px;
+    width: 30px;
+    
+    cursor: pointer;
+
+    z-index: 3;
+}
+
+.header-menu .close-menu-button,
+.header-menu .close-menu-button::before {
+    position: absolute;
+
+    height: 4px;
+    width: 30px;
+
+    background-color: #fff;
+    border-radius: 2px;
+
+    transition: width 400ms cubic-bezier(0.23, 1, 0.32, 1);
+
+    z-index: 3;
+}
+
+.header-menu .close-menu-button {
+    transform: rotate(45deg);
+}
+
+.header-menu .close-menu-button::before {
+    content: "";
+    transform: rotate(90deg);
+}
+
+@media (max-width: 450px) {
+    .header-menu {
+        width: 100%;
+        max-width: none;
+    }
+}
+
 /*======================
     Modal
 ======================*/
 .modal {
-    display: none;
 
-    position: absolute;
+    opacity: 0;
+
+    position: fixed;
     left: 0;
     top: 0;
+    scale: 0;
 
     width: 100%;
     height: 100%;
 
     background-color: #33333346;
 
-    z-index: 1;
+    transition: opacity 200ms ease;
+
+    z-index: 5;
 }
 
 #header-menu-toggle:checked ~ .modal {
-    display: block;
+    scale: 1;
+    opacity: 1;
 }
 
 /*======================
@@ -401,7 +545,7 @@ scale: 0;
 ======================*/
 
 #acougue {
-    min-height: 100vh;
+    height: 850px;
 }
 
 .section-bar {
@@ -474,21 +618,30 @@ scale: 0;
     z-index: 0;
 }
 
-.section-bar:hover .bar-fill {
+.section-bar:not(.active):hover .bar-fill {
+    background-image: none;
+    background-color: var(--clr-black);
+}
+
+.section-bar:not(.active):hover h3 {
+    color: var(--clr-chalk);
+}
+
+.section-bar.active .bar-fill {
     transform: scaleY(1);
     background-image: none;
     background-color: var(--clr-black);
 }
 
-.section-bar:hover .section-icon {
+.section-bar.active .section-icon {
     transform: scale(1);
 }
 
-.section-bar:hover .section-title {
+.section-bar.active .section-title {
     color: var(--clr-chalk);
 }
 
-.section-bar:hover .circle-fill {
+.section-bar.active .circle-fill {
     transform: scale(1);
 }
 
@@ -502,11 +655,16 @@ scale: 0;
 
     margin: auto;
     max-width: 900px;
+    height: 0;
+    opacity: 0;
+
+    transition: height 300ms ease, opacity 300ms ease;
+}
+
+#acougue .section-bar.active ~ .item-container {
     height: 300px;
-
-    border: 1px solid black;
-
     margin-bottom: 1rem;
+    opacity: 1;
 }
 
 #acougue .item-container .box {
@@ -516,7 +674,7 @@ scale: 0;
     left: 50%;
     
     width: 200px;
-    height: 250px;
+    height: 0;
 
     padding: .5rem;
   
@@ -535,12 +693,30 @@ scale: 0;
 
   }
 
+  /* =======================
+  Elementos filho estavam com height, causando quebra no footer
+  */
+
+  #acougue .section-bar:not(.active) ~ .item-container .box * {
+    height: 0;    
+}
+  
+  #acougue .section-bar.active ~ .item-container .box {
+    height: 250px;    
+}
+
+  /* ======================= 
+  */
+
+
   #acougue .item-container .button-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 250px;
-    height: 250px;
+    height: 0;
+
+    transition: height 300ms ease;
   }
 
   #acougue .item-container .button-container .button {
@@ -551,38 +727,6 @@ scale: 0;
     background-color: white;
     cursor: pointer;
     z-index: 4;
-  }
-  
-  #acougue .item-container .box.main-box {
-    left: 50%;
-    transform: translateX(-50%) scale(1);
-    z-index: 3;
-    pointer-events: all;
-  }
-  
-  #acougue .item-container .box.left-box {
-    left: 25%;
-    transform: translateX(-50%) scale(0.5);
-    z-index: 2;
-  }
-  
-  #acougue .item-container .box.right-box {
-    left: 75%;
-    transform: translateX(-50%) scale(0.5);
-    z-index: 2;
-  }
-  
-  #acougue .item-container .box.back-box {
-    left: 50%;
-    transform: translateX(-50%) scale(0.5);
-    z-index: 1;
-  }
-  
-  #acougue .item-container .box.start-box {
-    left: 100%;
-    transform: scale(0.5);
-    z-index: 1;
-    transition: none;
   }
 
   #acougue .item-container .box img {
@@ -624,12 +768,46 @@ scale: 0;
     cursor: pointer;
   }
 
+  /* Efeitos do Slide */
+  
+  #acougue .item-container .box.main-box {
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    z-index: 3;
+    pointer-events: all;
+  }
+  
+  #acougue .item-container .box.left-box {
+    left: 25%;
+    transform: translateX(-50%) scale(0.5);
+    z-index: 2;
+  }
+  
+  #acougue .item-container .box.right-box {
+    left: 75%;
+    transform: translateX(-50%) scale(0.5);
+    z-index: 2;
+  }
+  
+  #acougue .item-container .box.back-box {
+    left: 50%;
+    transform: translateX(-50%) scale(0.5);
+    z-index: 1;
+  }
+  
+  #acougue .item-container .box.start-box {
+    left: 100%;
+    transform: scale(0.5);
+    z-index: 1;
+    transition: none;
+  }
 
 /*======================
     Footer
 ======================*/
 
 footer {
+    margin-top: auto;
     height: 100px;
 
     background-image: linear-gradient(to right, #1f1f1f, transparent, #1f1f1f), url(midia/chalkboard-bg.jpg);
@@ -645,4 +823,8 @@ footer {
 
 .blue {
     color: var(--clr-white);
+}
+
+.center {
+    text-align: center;
 }

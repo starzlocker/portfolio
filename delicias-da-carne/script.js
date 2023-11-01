@@ -3,8 +3,15 @@
 ==================*/
 
 let destaqueBoxes = document.querySelectorAll("#destaque .box");
-let acougueBoxes = document.querySelectorAll("#acougue .box");
 let acougueButtons = document.querySelectorAll("#acougue .item-container .button-container .button ");
+
+let counterObj = {
+    "bovinos": 0,
+    "avinos": 0,
+    "suinos": 0,
+    "peixaria": 0
+};
+
 
 let slideRightDestaque = sliderDestaque();
 let slideAcougue = sliderAcougue();
@@ -46,23 +53,31 @@ function sliderDestaque() {
 }
 
 acougueButtons.forEach((btn) => {
+
     btn.addEventListener("click", function() {
-        slideAcougue(acougueBoxes, btn.id);
+        let currentSection = btn.parentElement.parentElement.parentElement;
+        let acougueBoxes = currentSection.querySelectorAll(".box");
+        slideAcougue(acougueBoxes, btn.id, currentSection.id);
     });
   })
 
 function sliderAcougue() {
-    let main = 0;
+    let firstClick = true;
 
-      let slide = function(array, action) {
-        console.log(action);
+      let slide = function(array, action, id) {
+
+        let main = counterObj[id];
+
         if (action === "previous") {
-
+            if (firstClick) {
+                return;
+            } 
+            
             if (main === 0) {
                 main = array.length - 1;
-                } else {
+            } else {
                 main--
-                }
+            }
                   
                 let back = main >= 2 ? array[main - 2] :  
                 main === 1 ? array[array.length - 1] :
@@ -77,12 +92,15 @@ function sliderAcougue() {
                 back.setAttribute("class", "box back-box")
 
         } else if (action === "next") {
-
+            if (firstClick) {
+                firstClick = false;
+            } 
+            
             if (main === array.length - 1) {
                 main = 0;
-                } else {
+            } else {
                 main++
-                }
+            }
         
                 let back = main >= 2 ? array[main - 2] :  
                 main === 1 ? array[array.length - 1] :
@@ -96,12 +114,30 @@ function sliderAcougue() {
                 next.setAttribute("class", "box right-box");
                 back.setAttribute("class", "box back-box")
         }
-            
+            counterObj[id] = main;
       } 
 
       return slide;
   
   }
+
+/*==================
+    Açougue Dropdown
+==================*/
+
+let categories = document.querySelectorAll("#acougue .section-bar");
+let acougue = document.querySelector("#acougue");
+
+categories.forEach((cat) => {
+    cat.addEventListener("click", (e) => {
+        let current = e.currentTarget;
+
+        categories.forEach((cat) => {
+            cat === current ? cat.classList.toggle("active") :
+                              cat.classList.remove("active");
+        });
+    })
+});
 
 /*==================
     Buy Counter
