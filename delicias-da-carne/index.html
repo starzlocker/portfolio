@@ -27,24 +27,30 @@
 
         </div>
 
-        <div class="header-nav-button">
+        <div class="header-nav">
 
-            <input type="checkbox" id="header-menu-toggle">
-
-            <label for="header-menu-toggle" class="header-menu-button-container">
+            <div id="header-openbtn" class="header-menu-button-container btn">
 
                 <div class="header-menu-button"></div>
 
-            </label>
+            </div>
 
             <nav class="header-menu">
 
+                <div class="menu-head">
+                    
+                    <div
+                    id="header-closebtn" class="header-menu-button-container btn">
+                        <div class="header-menu-button"></div>
+                    </div>
+                </div>
+
                 <ul class="nav-links">
-                    <li>Example</li>
+                    <a href="#destaques"><li>Destaques</li></a>
                     <hr class="list-line">
-                    <li>Example</li>
+                    <a href="#acougue"><li>Açougue</li></a>
                     <hr class="list-line">
-                    <li>Example</li>
+                    <a href="#sobre-nos"><li>Sobre nós</li></a>
                     <hr class="list-line">
                     <li>Example</li>
                     <hr class="list-line">
@@ -57,7 +63,7 @@
         </div>
     </header>
     <main>
-        <section id="destaque">
+        <section id="destaques">
             <h2 class="center">- Destaques -</h2>
             <div class="slide-container">
                 <div class="box-fill"></div>
@@ -91,6 +97,8 @@
             </div>
         </section>
 
+        <hr class="section-hr">
+
         <section id="acougue">
             <h2 class="center">- Açougue -</h2>
             <section id="bovinos">
@@ -109,7 +117,7 @@
                         <button class="button" id="next"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
 
-                    <div class="box main-box">
+                    <!-- <div class="box main-box">
                         <img src="midia/meat-example.jpg" alt="Pedaços de carne crua">
                         <div class="item-description">
                             <h4>Picanha</h4>
@@ -179,7 +187,7 @@
                                 <button id="add">+</button>
                             </div>
                         </div>
-                    </div>                
+                    </div>                 -->
                 </div>
             </section>
 

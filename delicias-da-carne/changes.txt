@@ -1,3 +1,6 @@
+.box display none
+.box .main, etc display grid
+
 /*==================
     Menu
 ==================*/
@@ -47,7 +50,7 @@ let acougueObject = {
             maminha:
                 {
                     nome: "Maminha",
-                    imagem: "midia/maminha-p.png",
+                    imagem: "midia/meat-example.jpg",
                     unidade: 500,
                     preco: 50
                 },
@@ -76,46 +79,7 @@ let acougueObject = {
         },
     avinos: 
         {
-            counter: 0,
-            
-            picanha:
-                {
-                    nome: "Picanha",
-                    categoria: "bovinos",
-                    imagem: "midia/meat-example.jpg",
-                    unidade: 500,
-                    preco: 50
-                },
-
-            maminha:
-                {
-                    nome: "Maminha",
-                    imagem: "midia/maminha-p.png",
-                    unidade: 500,
-                    preco: 50
-                },
-
-            fraldinha:
-                {
-                    nome: "Fraldinha",
-                    imagem: "midia/meat-example.jpg",
-                    unidade: 500,
-                    preco: 50
-                },
-            patinho:
-                {
-                    nome: "Patinho",
-                    imagem: "midia/meat-example.jpg",
-                    unidade: 500,
-                    preco: 50
-                },
-            acem:
-                {
-                    nome: "Acem",
-                    imagem: "midia/meat-example.jpg",
-                    unidade: 500,
-                    preco: 50
-                }
+            counter: 0
         },
     suinos:
         {
@@ -128,49 +92,18 @@ let acougueObject = {
 
 };
 
-function createAcougue(object) {
-    let array = Object.entries(object);
-    let counter = 0;
-
-    console.log(array)
-    function iterate(array, counter) {
-        console.log(counter);
-        if (counter >= array.length) {
-            return;
-        }
-
-        for(let i = 1; i < array.length; i++) { 
-            let [key] = array[counter];
-    
-            currentSection = document.querySelector(`#${key} .item-container`);
-
-            let value = array[counter][1]
-
-            // I NEED TO ITERATE OVER MY OBJEEEEEEEECT
-
-            console.log(array[counter][1])
-        
-            currentSection.innerHTML += createAcougueItem(value, i);
-        }
-
-        iterate(array, ++counter);
-    }
-
-    iterate(array, counter);
-}
-
-createAcougue(acougueObject)
-
-/* ===== Iterador do objeto =====*/
-// let bovinosArray = Object.entries(acougueObject.bovinos);
-
-// for(let i = 1; i < bovinosArray.length; i++) { 
-//     // i = 1 pq 1 = 0 é o bovinos.counter
-
-//         console.log(bovinosArray[i][1])
-//         bovinos.innerHTML += createAcougueItem(bovinosArray[i][1], i);
+// for([key, value] of Object.entries(acougueObject.bovinos)) {
+//     if(key !== "counter") {
+//         bovinos.innerHTML += createAcougueItem(value);
+//     }
 // }
+let bovinosArray = Object.entries(acougueObject.bovinos);
+for(let i = 1; i < bovinosArray.length; i++) { 
+    // i = 1 pq 1 = 0 é o bovinos.counter
 
+        console.log(bovinosArray[i][1])
+        bovinos.innerHTML += createAcougueItem(bovinosArray[i][1], i);
+}
 
 function createAcougueItem(obj, i) {
     let htmlClass;
@@ -282,24 +215,18 @@ function sliderAcougue() {
             } else {
                 main--
             }
-
-            for(let element of array) {
-                element.setAttribute("class", "box back-box");
-            }
-
-            let back = 
-            main >= 2 ? array[main - 2] :  
-            main === 1 ? array[array.length - 1] :
-            array[array.length - 2];
-
-            let current = array[main];
-            let previous = array[main - 1] ?? array[array.length - 1];
-            let next = array[main + 1] ?? array[0];
-    
-            current.setAttribute("class", "box main-box");
-            previous.setAttribute("class", "box left-box");
-            next.setAttribute("class", "box right-box");
-            back.setAttribute("class", "box back-box");
+                  
+                let back = main >= 2 ? array[main - 2] :  
+                main === 1 ? array[array.length - 1] :
+                array[array.length - 2];   
+                let current = array[main];
+                let previous = array[main - 1] ?? array[array.length - 1];
+                let next = array[main + 1] ?? array[0];
+        
+                current.setAttribute("class", "box main-box");
+                previous.setAttribute("class", "box left-box");
+                next.setAttribute("class", "box right-box");
+                back.setAttribute("class", "box back-box")
 
         } else if (action === "next") {
             if (firstClick) {
