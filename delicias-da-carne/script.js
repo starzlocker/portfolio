@@ -1,4 +1,37 @@
 /*==================
+    Moving Menu Header
+==================*/
+let headerEl = document.querySelector("header");
+let scrollLinks = document.querySelectorAll(".scroll");
+
+window.addEventListener("scroll", () => {
+    let y = window.scrollY;
+    let headerY = headerEl.getBoundingClientRect().height;
+
+    if (y > headerY) {
+        headerEl.classList.add("fixed");
+    } else {
+        headerEl.classList.remove("fixed");
+    }
+})
+
+scrollLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        let reference = link.getAttribute("href");
+    
+        let element = document.querySelector(reference);
+        let position = element.offsetTop - 100;
+
+        console.log(element, position)
+
+        window.scrollTo({left: 0, top: position})
+    })
+})
+
+/*==================
     Menu
 ==================*/
 let headerBtns = document.querySelectorAll(".header-nav .btn");
@@ -33,12 +66,13 @@ let bovinos = document.querySelector("#bovinos .item-container");
 let acougueObject = {
     bovinos: 
         {
+            firstClick: true,
+
             counter: 0,
 
             picanha:
                 {
                     nome: "Picanha",
-                    categoria: "bovinos",
                     imagem: "midia/meat-example.jpg",
                     unidade: 500,
                     preco: 50
@@ -59,6 +93,7 @@ let acougueObject = {
                     unidade: 500,
                     preco: 50
                 },
+
             patinho:
                 {
                     nome: "Patinho",
@@ -66,6 +101,7 @@ let acougueObject = {
                     unidade: 500,
                     preco: 50
                 },
+
             acem:
                 {
                     nome: "Acem",
@@ -76,110 +112,174 @@ let acougueObject = {
         },
     avinos: 
         {
+            firstClick: true,
+
             counter: 0,
             
-            picanha:
+            peitoDeFrango:
                 {
-                    nome: "Picanha",
-                    categoria: "bovinos",
-                    imagem: "midia/meat-example.jpg",
+                    nome: "Peito de Frango",
+                    imagem: "midia/chicken.jpg",
                     unidade: 500,
                     preco: 50
                 },
 
-            maminha:
+            coxaESobrecoxa:
                 {
-                    nome: "Maminha",
-                    imagem: "midia/maminha-p.png",
+                    nome: "Coxa e Sobrecoxa",
+                    imagem: "midia/chicken.jpg",
                     unidade: 500,
                     preco: 50
                 },
 
-            fraldinha:
+            frangoAPassarinho:
                 {
-                    nome: "Fraldinha",
-                    imagem: "midia/meat-example.jpg",
+                    nome: "Frango à Passarinho",
+                    imagem: "midia/chicken.jpg",
                     unidade: 500,
                     preco: 50
                 },
-            patinho:
+
+            tulipa:
                 {
-                    nome: "Patinho",
-                    imagem: "midia/meat-example.jpg",
-                    unidade: 500,
-                    preco: 50
-                },
-            acem:
-                {
-                    nome: "Acem",
-                    imagem: "midia/meat-example.jpg",
+                    nome: "Túlipa",
+                    imagem: "midia/chicken.jpg",
                     unidade: 500,
                     preco: 50
                 }
         },
     suinos:
         {
-            counter: 0
+            firstClick: true,
+
+            counter: 0,
+
+            panceta:
+                {
+                    nome: "Panceta",
+                    imagem: "midia/piggy.jpg",
+                    unidade: 500,
+                    preco: 50
+                },
+
+            lomboSuino:
+                {
+                    nome: "Lombo Suíno",
+                    imagem: "midia/piggy.jpg",
+                    unidade: 500,
+                    preco: 50
+                },
+
+            linguicaToscana:
+                {
+                    nome: "Linguiça Toscana",
+                    imagem: "midia/piggy.jpg",
+                    unidade: 500,
+                    preco: 50
+                },
+
+            bisteca:
+                {
+                    nome: "Bisteca",
+                    imagem: "midia/piggy.jpg",
+                    unidade: 500,
+                    preco: 50
+                }
         },
     peixaria:
         {
-            counter: 0
+            firstClick: true,
+
+            counter: 0,
+
+            tilapia:
+            {
+                nome: "Tilápia",
+                imagem: "midia/peixes.png",
+                unidade: 500,
+                preco: 50
+            },
+
+        cavalinha:
+            {
+                nome: "Cavalinha",
+                imagem: "midia/peixes.png",
+                unidade: 500,
+                preco: 50
+            },
+
+        pacu:
+            {
+                nome: "Pacu",
+                imagem: "midia/peixes.png",
+                unidade: 500,
+                preco: 50
+            },
+
+        pescadaBranca:
+            {
+                nome: "Pescada Branca",
+                imagem: "midia/peixes.png",
+                unidade: 500,
+                preco: 50
+            },
+        
+        salmao:
+            {
+                nome: "Salmão",
+                imagem: "midia/meat-example.jpg",
+                unidade: 500,
+                preco: 50
+            },
+
+        camarao:
+            {
+                nome: "Camarão",
+                imagem: "midia/meat-example.jpg",
+                unidade: 500,
+                preco: 50  
+            }
         }
 
 };
 
 function createAcougue(object) {
     let array = Object.entries(object);
-    let counter = 0;
+    let sections = {};
 
-    console.log(array)
-    function iterate(array, counter) {
-        console.log(counter);
-        if (counter >= array.length) {
-            return;
-        }
+    array.forEach( ([category, x]) => {
+        sections[category] = document.querySelector( `#${category} .item-container` );
+    } )
 
-        for(let i = 1; i < array.length; i++) { 
-            let [key] = array[counter];
+    for(let counter = 0; counter < array.length; counter++) {  
+        let [category, categoryValues] = array[counter];
+
+        let values = Object.values(categoryValues);
+
     
-            currentSection = document.querySelector(`#${key} .item-container`);
-
-            let value = array[counter][1]
-
-            // I NEED TO ITERATE OVER MY OBJEEEEEEEECT
-
-            console.log(array[counter][1])
-        
-            currentSection.innerHTML += createAcougueItem(value, i);
+        let htmlString = '';
+    
+        for(let i = 2; i < values.length; i++) {      
+            htmlString += createAcougueItem(values[i], i);
         }
+    
+        sections[category].innerHTML += htmlString;
 
-        iterate(array, ++counter);
     }
 
-    iterate(array, counter);
 }
 
 createAcougue(acougueObject)
-
-/* ===== Iterador do objeto =====*/
-// let bovinosArray = Object.entries(acougueObject.bovinos);
-
-// for(let i = 1; i < bovinosArray.length; i++) { 
-//     // i = 1 pq 1 = 0 é o bovinos.counter
-
-//         console.log(bovinosArray[i][1])
-//         bovinos.innerHTML += createAcougueItem(bovinosArray[i][1], i);
-// }
 
 
 function createAcougueItem(obj, i) {
     let htmlClass;
 
     switch(i) {
-        case 1:
+        case 2:
             htmlClass = "main-box";
             break;
-        case 2:
+        case 3:
             htmlClass = "right-box";
             break;
         default:
@@ -216,6 +316,7 @@ function createAcougueItem(obj, i) {
 
 let destaqueBoxes = document.querySelectorAll("#destaques .box");
 let acougueButtons = document.querySelectorAll("#acougue .item-container .button-container .button ");
+let points = document.querySelectorAll(".point");
 
 let slideRightDestaque = sliderDestaque();
 let slideAcougue = sliderAcougue();
@@ -237,6 +338,12 @@ function sliderDestaque() {
         main++
         }
 
+        points.forEach(point => {
+            point === points[main] ?
+            point.classList.toggle("active") :
+            point.classList.remove("active");
+        })
+
         let current = array[main];
         let previous = array[main - 1] ?? array[array.length - 1];
         let next = array[main + 1] ?? array[0];
@@ -248,10 +355,10 @@ function sliderDestaque() {
         array.length > 3 ? back.setAttribute("class", "box back-box") : null;
 
         clearInterval(interval);
-        interval = window.setInterval(function() {slideRight(array)}, 5000);
+        interval = window.setInterval(function() {slideRight(array)}, 10000);
     }
 
-    let interval = window.setInterval(function() {slideRight(destaqueBoxes)}, 5000); 
+    let interval = window.setInterval(function() {slideRight(destaqueBoxes)}, 10000); 
 
     return slideRight;
 }
@@ -266,14 +373,15 @@ acougueButtons.forEach((btn) => {
   })
 
 function sliderAcougue() {
-    let firstClick = true;
 
       let slide = function(array, action, id) {
+
+        let section = acougueObject[id];
 
         let main = acougueObject[id]["counter"];
 
         if (action === "previous") {
-            if (firstClick) {
+            if (section.firstClick) {
                 return;
             } 
             
@@ -302,8 +410,8 @@ function sliderAcougue() {
             back.setAttribute("class", "box back-box");
 
         } else if (action === "next") {
-            if (firstClick) {
-                firstClick = false;
+            if (section.firstClick) {
+                section.firstClick = false;
             } 
             
             if (main === array.length - 1) {
