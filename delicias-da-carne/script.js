@@ -227,7 +227,7 @@ let acougueObject = {
         salmao:
             {
                 nome: "Salmão",
-                imagem: "midia/meat-example.jpg",
+                imagem: "midia/peixes.png",
                 unidade: 500,
                 preco: 50
             },
@@ -235,7 +235,7 @@ let acougueObject = {
         camarao:
             {
                 nome: "Camarão",
-                imagem: "midia/meat-example.jpg",
+                imagem: "midia/peixes.png",
                 unidade: 500,
                 preco: 50  
             }
