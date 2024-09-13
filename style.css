@@ -69,6 +69,8 @@ ul {
 }
 
 li {
+  font-family: var(--ff-primary);
+  font-size: 1rem;
   margin-bottom: .8rem;
 }
 
@@ -102,6 +104,8 @@ h4 {
   font-size: 0.875rem;
 }
 p {
+  font-family: var(--ff-primary);
+  font-size: 1rem;
   margin-bottom: 1.25rem;
   color: var(--clr-black);
 }
@@ -291,10 +295,7 @@ footer {
     text-align: center;
     border-radius: 10px;
   }
-  p {
-    font-size: .9rem;
-  }
-
+  
   .title span {
     display: inline;
   }
